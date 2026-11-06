@@ -1,0 +1,11 @@
+name: Ticket transition
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  transition:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Ticket transition is not available. This is not a code problem."
+          exit 1

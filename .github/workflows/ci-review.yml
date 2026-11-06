@@ -1,0 +1,17 @@
+name: Wait for review
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+permissions:
+  pull-requests: read
+jobs:
+  ci-review:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          state=$(gh api "repos/${{ github.repository }}/pulls/$PR/reviews" --jq '[.[] | select(.state == "APPROVED" or .state == "CHANGES_REQUESTED")] | last | .state')
+          echo "Latest review: $state"
+          [ "$state" = "APPROVED" ]

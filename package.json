@@ -1,0 +1,6 @@
+{
+  "name": "qz-ci-checks-testbed",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test" }
+}
